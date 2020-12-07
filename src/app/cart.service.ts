@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { HttpClient } from '@angular/common/http';
 import { products } from "./products";
 
 @Injectable({
@@ -18,10 +19,16 @@ export class CartService {
   }
 
   //清除购物车商品
-  clearCarts() {
+  clearCart() {
     this.items = [];
     return this.items;
   }
 
-  constructor() {}
+  getShippingPrices(){
+    return this.http.get('/assets/shipping.json');
+  }
+
+  constructor(
+    private http: HttpClient
+  ) {}
 }
